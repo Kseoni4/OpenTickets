@@ -26,6 +26,7 @@ public class UserEntity {
 
     private LocalDate registerDate;
 
+    private String password;
 
     /*
         SELECT *
