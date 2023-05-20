@@ -16,6 +16,10 @@ public class UserDao {
     private final UserRepository userRepository;
 
 
+    public boolean isUserExist(String email){
+       return userRepository.findByEmail(email).isPresent();
+    }
+
     public UUID getUserIdByEmail(String email){
         return userRepository.findByEmail(email).orElseThrow().getUserId();
     }

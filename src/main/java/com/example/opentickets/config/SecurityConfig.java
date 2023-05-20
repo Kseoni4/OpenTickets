@@ -1,5 +1,7 @@
 package com.example.opentickets.config;
 
+import com.example.opentickets.jwt.JwtFilter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -12,8 +14,10 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final JwtFilter jwtFilter;
 
     @Bean
     public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
@@ -26,6 +30,7 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.POST,"auth/**").permitAll()
                                 .requestMatchers("/error**").permitAll()
                                 .anyRequest().authenticated())
+                .addFilterBefore(jwtFilter, JwtFilter.class)
                 .build();
 
     }

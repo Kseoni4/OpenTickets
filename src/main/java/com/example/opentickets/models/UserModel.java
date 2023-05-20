@@ -2,10 +2,7 @@ package com.example.opentickets.models;
 
 import com.example.opentickets.entities.UserEntity;
 import com.example.opentickets.models.enums.UserRole;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +14,7 @@ import java.util.Collections;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class UserModel implements UserDetails {
 
     private String email;

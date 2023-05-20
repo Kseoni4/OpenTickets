@@ -1,6 +1,9 @@
 package com.example.opentickets.jwt;
 
 import com.example.opentickets.models.UserModel;
+import com.example.opentickets.models.enums.UserRole;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +35,17 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public UserModel parseToken(String jwt) {
-        return null;
+        Jwt token = Jwts.parserBuilder()
+                .setSigningKey(getSigninKey())
+                .build()
+                .parse(jwt);
+
+        Claims body = (Claims) token.getBody();
+
+        return UserModel.builder()
+                .email(body.getSubject())
+                .userRole(body.get("userRole", UserRole.class))
+                .build();
     }
 
 
