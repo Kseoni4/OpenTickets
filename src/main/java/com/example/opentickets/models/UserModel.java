@@ -1,5 +1,6 @@
 package com.example.opentickets.models;
 
+import com.example.opentickets.entities.UserEntity;
 import com.example.opentickets.models.enums.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,15 @@ public class UserModel implements UserDetails {
     private String password;
 
     private UserRole userRole;
+
+
+    public static UserModel fromEntity(UserEntity userEntity){
+        return new UserModel(
+                userEntity.getEmail(),
+                userEntity.getPassword(),
+                userEntity.getUserRole()
+        );
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,9 +1,12 @@
 package com.example.opentickets.dao;
 
+import com.example.opentickets.entities.UserEntity;
+import com.example.opentickets.models.enums.UserRole;
 import com.example.opentickets.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Component
@@ -19,5 +22,16 @@ public class UserDao {
 
     public String getEmailById(UUID userId){
         return userRepository.findById(userId).orElseThrow().getEmail();
+    }
+
+    public UserEntity createUser(String email, String password, UserRole role){
+
+        return userRepository.save(UserEntity.builder()
+                .email(email)
+                .password(password)
+                .registerDate(LocalDate.now())
+                .userRole(role)
+                .build());
+
     }
 }

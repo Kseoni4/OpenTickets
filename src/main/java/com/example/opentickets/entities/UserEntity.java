@@ -1,5 +1,6 @@
 package com.example.opentickets.entities;
 
+import com.example.opentickets.models.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -27,6 +28,9 @@ public class UserEntity {
     private LocalDate registerDate;
 
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
 
     /*
         SELECT *
