@@ -21,6 +21,7 @@ public class UserController {
 
     private final UserService userService;
 
+    //http://localhost:8080/auth/register
     @PostMapping("/register")
     public UserRegisterResponse register(@RequestBody UserRegisterRequest registerRequest){
         TokenModel tokenModel = userService.register(registerRequest);
@@ -31,6 +32,7 @@ public class UserController {
         );
     }
 
+    //http://localhost:8080/auth/login
     @PostMapping("/login")
     public UserLoginResponse login(@RequestBody UserLoginRequest loginRequest){
         log.info(loginRequest.toString());

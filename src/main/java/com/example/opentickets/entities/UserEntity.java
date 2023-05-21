@@ -40,6 +40,6 @@ public class UserEntity {
      */
 
     @OneToMany
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "ticket_owner_user_id")
     private List<TicketEntity> ownedTickets;
 }

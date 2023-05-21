@@ -31,6 +31,6 @@ public class TicketEntity {
 
     private boolean isRedeemed;
 
-    private UUID userId;
-
+    @ManyToOne(targetEntity = UserEntity.class)
+    private UserEntity ticketOwner;
 }

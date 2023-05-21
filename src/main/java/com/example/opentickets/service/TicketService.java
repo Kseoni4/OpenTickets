@@ -1,5 +1,6 @@
 package com.example.opentickets.service;
 
+import com.example.opentickets.messages.requests.TicketRedeemRequest;
 import com.example.opentickets.messages.requests.TicketRegisterRequest;
 import com.example.opentickets.messages.responses.TicketRegisterResponse;
 import com.example.opentickets.models.TicketModel;
@@ -11,4 +12,6 @@ public interface TicketService {
     TicketModel register(TicketRegisterRequest ticketRegisterRequest);
 
     List<TicketModel> getAllTickets();
+
+    TicketModel redeemTicket(TicketRedeemRequest ticketRedeemRequest);
 }

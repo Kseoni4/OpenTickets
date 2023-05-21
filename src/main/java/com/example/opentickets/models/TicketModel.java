@@ -1,6 +1,7 @@
 package com.example.opentickets.models;
 
 
+import com.example.opentickets.entities.TicketEntity;
 import com.example.opentickets.models.enums.TicketType;
 import lombok.*;
 
@@ -25,4 +26,16 @@ public class TicketModel {
     private String emailOwner;
 
     private boolean isRedeemed;
+
+
+    public static TicketModel fromEntity(TicketEntity ticket){
+        return TicketModel.builder()
+                .ticketId(ticket.getTicketId())
+                .eventName(ticket.getEventName())
+                .eventDate(ticket.getEventDate())
+                .ticketType(ticket.getTicketType())
+                .emailOwner(ticket.getTicketOwner().getEmail())
+                .isRedeemed(ticket.isRedeemed())
+                .build();
+    }
 }

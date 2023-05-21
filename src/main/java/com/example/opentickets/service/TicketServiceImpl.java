@@ -3,6 +3,7 @@ package com.example.opentickets.service;
 import com.example.opentickets.dao.TicketDao;
 import com.example.opentickets.dao.UserDao;
 import com.example.opentickets.entities.TicketEntity;
+import com.example.opentickets.messages.requests.TicketRedeemRequest;
 import com.example.opentickets.messages.requests.TicketRegisterRequest;
 import com.example.opentickets.models.TicketModel;
 import com.example.opentickets.repositories.TicketRepository;
@@ -33,6 +34,17 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public List<TicketModel> getAllTickets(){
         return ticketDao.getAllTickets();
+    }
+
+    @Override
+    public TicketModel redeemTicket(TicketRedeemRequest ticketRedeemRequest) {
+        if(!ticketDao.isTicketExists(ticketRedeemRequest.getTicketId())){
+            throw new RuntimeException();
+        }
+
+        TicketEntity ticketEntity = ticketDao.redeemTicketById(ticketRedeemRequest.getTicketId());
+
+        return TicketModel.fromEntity(ticketEntity);
     }
 
 }
