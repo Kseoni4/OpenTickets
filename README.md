@@ -8,6 +8,17 @@
 * Spring Security - авторизация и аутентификация пользователей, настройка безопасности для эндпоинтов;
 * JWT - для использования в качестве сессии пользователя.
 
+## Настройка проекта
+
+Основные настройки проекта находятся в файле application.properties:
+```properties
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.url=jdbc:postgresql://localhost:5432/tickets_db
+spring.datasource.username=user
+spring.datasource.password=password
+spring.jpa.hibernate.ddl-auto=update
+```
+Для работы проекта требуется создать базу данных в СУБД PostgreSQL. Способы установки представленны в [данном гайде](https://docs.google.com/document/d/1hfu2vIab9lL6AD2bxUmMZYSmvtYYJF1RS_0BbKAHqy4/edit).
 
 ## Endpoints
 
