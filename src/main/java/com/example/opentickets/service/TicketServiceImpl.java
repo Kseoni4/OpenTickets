@@ -8,6 +8,8 @@ import com.example.opentickets.models.TicketModel;
 import com.example.opentickets.repositories.TicketRepository;
 import com.example.opentickets.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +23,10 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public TicketModel register(TicketRegisterRequest ticketRegisterRequest) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        String email = (String) auth.getPrincipal();
+        ticketRegisterRequest.setEmailOwner(email);
         return ticketDao.saveTicket(ticketRegisterRequest);
     }
 

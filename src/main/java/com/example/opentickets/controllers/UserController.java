@@ -7,12 +7,14 @@ import com.example.opentickets.messages.responses.UserRegisterResponse;
 import com.example.opentickets.models.TokenModel;
 import com.example.opentickets.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Slf4j
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class UserController {
@@ -31,7 +33,11 @@ public class UserController {
 
     @PostMapping("/login")
     public UserLoginResponse login(@RequestBody UserLoginRequest loginRequest){
-        return null;
+        log.info(loginRequest.toString());
+
+        TokenModel tokenModel = userService.login(loginRequest);
+
+        return new UserLoginResponse(tokenModel.getEmail(), tokenModel.getToken());
     }
 
 }

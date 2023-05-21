@@ -25,9 +25,14 @@ public class DataInitializer {
     }
 
     private void createUser(){
+        if(userRepository.findByEmail("greatoldfag@gmail.com").isPresent()){
+            return;
+        }
+
         userRepository.save(
                 UserEntity.builder()
                         .email("greatoldfag@gmail.com")
+                        .password("password")
                         .registerDate(LocalDate.now()).build()
         );
     }

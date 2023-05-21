@@ -38,4 +38,12 @@ public class UserDao {
                 .build());
 
     }
+
+    public UserEntity getUserByEmail(String email){
+        return userRepository.findByEmail(email).orElseThrow();
+    }
+
+    public String getPasswordHash(String email){
+        return userRepository.findByEmail(email).orElseThrow().getPassword();
+    }
 }

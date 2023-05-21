@@ -44,7 +44,7 @@ public class JwtServiceImpl implements JwtService {
 
         return UserModel.builder()
                 .email(body.getSubject())
-                .userRole(body.get("userRole", UserRole.class))
+                .userRole(UserRole.valueOf(body.get("userRole", String.class)))
                 .build();
     }
 
