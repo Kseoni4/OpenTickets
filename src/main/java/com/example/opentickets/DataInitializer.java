@@ -60,6 +60,7 @@ public class DataInitializer {
         ticketRepository.save(
                 TicketEntity.builder()
                         .eventName("TestEvent")
+                        .eventDate(LocalDate.now().plusDays(new Random().nextInt(365)+1))
                         .ticketType(TicketType.values()[new Random().nextInt(4)])
                         .ticketOwner(userRepository.findByEmail("greatoldfag@gmail.com").get())
                         .isRedeemed(false).build()
