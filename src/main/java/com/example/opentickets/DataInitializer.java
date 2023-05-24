@@ -2,6 +2,8 @@ package com.example.opentickets;
 
 import com.example.opentickets.entities.TicketEntity;
 import com.example.opentickets.entities.UserEntity;
+import com.example.opentickets.models.UserModel;
+import com.example.opentickets.models.enums.Permission;
 import com.example.opentickets.models.enums.TicketType;
 import com.example.opentickets.models.enums.UserRole;
 import com.example.opentickets.repositories.TicketRepository;
@@ -9,6 +11,7 @@ import com.example.opentickets.repositories.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -46,6 +49,18 @@ public class DataInitializer {
                         .userRole(UserRole.USER)
                         .registerDate(LocalDate.now()).build()
         );
+
+        UserEntity user = UserEntity.builder()
+                .email("greatoldfag2@gmail.com")
+                .password(passwordEncoder.encode("password"))
+                .userRole(UserRole.USER)
+                .registerDate(LocalDate.now()).build();
+
+        UserModel.fromEntity(user).getAuthoritySet().add(new SimpleGrantedAuthority(Permission.USER_WRITE.getPermission()));
+
+        userRepository.save(user);
+
+
 
         userRepository.save(
                 UserEntity.builder()

@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -23,18 +24,20 @@ public class UserModel implements UserDetails {
 
     private UserRole userRole;
 
+    private Set<SimpleGrantedAuthority> authoritySet;
 
     public static UserModel fromEntity(UserEntity userEntity){
         return new UserModel(
                 userEntity.getEmail(),
                 userEntity.getPassword(),
-                userEntity.getUserRole()
+                userEntity.getUserRole(),
+                userEntity.getUserRole().getAuthorities()
         );
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(userRole.name()));
+        return this.authoritySet;
     }
 
     @Override
