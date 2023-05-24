@@ -14,9 +14,7 @@ class OpenTicketsApplicationTests {
 
     @Test
     void contextLoads() {
-        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
-                "test@test", null, null
-        ));
+
     }
 
 }
